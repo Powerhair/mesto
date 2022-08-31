@@ -1,7 +1,5 @@
 .header__logo {
-    background-image: url('../../image/mesto_logo.svg');
-    background-size: 142px 33px;
-   width: 142px;
-   height: 33px;
-
+   max-width: 142px;
+   max-height: 33px;
+   margin: 0 738px 41px 0;
 }

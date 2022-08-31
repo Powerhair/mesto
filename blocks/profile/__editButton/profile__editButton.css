@@ -1,0 +1,11 @@
+.profile__editButton {
+    margin: 37px 244px 59px 0;
+    border: 1px solid #FFFFFF;
+    width: 24px;
+    height: 24px;
+    background-image: url(../../../image/feather.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 10px 10px;
+    background-color: transparent;
+}
