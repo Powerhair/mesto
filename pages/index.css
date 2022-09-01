@@ -34,3 +34,4 @@
 
 /* footer */
 @import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__logo/footer__logo.css);  
