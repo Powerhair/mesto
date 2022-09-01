@@ -6,98 +6,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./pages/index.css">
     <title>Место</title>
+    <meta name="keywords" content="HTML5, CSS, JS">
+    <meta name="author" content="Pavel Bondarevskii">
 </head>
 <body class="page">
     <header class="header">
         <img src="./image/mesto_logo.svg"
              alt="Место"
              class="header__logo">
-        <div class="header__line-bottom"></div>
     </header>
     <main class="content">
         <section class="profile">
             <img src="./image/avatar.png"
-                 alt=""
+                 alt="Фото профиля"
                  class="profile__avatar">
             <div class="profile__info">
                 <h1 class="profile__title">Жак-Ив Кусто</h1>
                 <p class="profile__text">Исследователь океана</p>
+                <input type="button" class="button profile__editButton">
             </div>
-            <input type="button" class="profile__editButton">
-            <input type="buton" name="" id=""  class="profile__addButton">
+            <input type="buton" class="button profile__addButton">
         </section>
         <section class="elements">
             <div class="element">
-                <img src="./image/kchr.png" 
+                <img src="./image/kchr.png"
                      alt=""
                      class="element__image">
                 <div class="element__container">
                     <h4 class="element__title">Карачаевск</h4>
-                    <img src="./image/like.svg"
-                         alt=""
-                         class="element__like">
+                    <input type="button" class="element__like">
                 </div>
             </div>
             <div class="element">
-                <img src="./image/elbrus.png" 
+                <img src="./image/elbrus.png"
                      alt=""
                      class="element__image">
                 <div class="element__container">
                     <h4 class="element__title">Гора Эльбрус</h4>
-                    <img src="./image/like.svg"
-                         alt=""
-                         class="element__like">
+                    <input type="button" class="element__like">
                 </div>
             </div>
             <div class="element">
-                <img src="./image/dombai.png" 
+                <img src="./image/dombai.png"
                      alt=""
                      class="element__image">
                 <div class="element__container">
                     <h4 class="element__title">Домбай</h4>
-                    <img src="./image/like.svg"
-                         alt=""
-                         class="element__like">
+                    <input type="button" class="element__like">
                 </div>
             </div>
             <div class="element">
-                <img src="./image/elbrus.png" 
+                <img src="./image/elbrus.png"
                      alt=""
                      class="element__image">
                 <div class="element__container">
                     <h4 class="element__title">Гора Эльбрус</h4>
-                    <img src="./image/like.svg"
-                         alt=""
-                         class="element__like">
+                    <input type="button" class="element__like">
                 </div>
             </div>
             <div class="element">
-                <img src="./image/dombai.png" 
+                <img src="./image/dombai.png"
                      alt=""
                      class="element__image">
                 <div class="element__container">
                     <h4 class="element__title">Домбай</h4>
-                    <img src="./image/like.svg"
-                         alt=""
-                         class="element__like">
+                    <input type="button" class="element__like">
                 </div>
             </div>
             <div class="element">
-                <img src="./image/kchr.png" 
+                <img src="./image/kchr.png"
                      alt=""
                      class="element__image">
                 <div class="element__container">
                     <h4 class="element__title">Карачаевск</h4>
-                    <img src="./image/like.svg"
-                         alt=""
-                         class="element__like">
+                    <input type="button" class="element__like">
                 </div>
             </div>
         </section>
     </main>
     <footer class="footer">
-        <p class="footer__logo">© 2020 Mesto Russia</p>
+        <p class="footer__logo">© 2022 Mesto Russia</p>
     </footer>
+    <div class="popup">
+        <form class="popup__container" method="post" name="form-popup">
+            <h3 class="popup__title">Редактировать профиль</h3>
+            <input name="name-input"
+                   value=""
+                   class="popup__input"
+                   type="text"
+                   placeholder="Имя">
+            <input name="job-input"
+                   value="" class="popup__input"
+                   type="text"
+                   placeholder="Описание">
+            <input class="popup__button-submit"
+                    type="submit"
+                    value="Сохранить">
+            <input class="popup__button-exit"
+                    type="button"
+                    value="Закрыть">
+        </form>
+    </div>
     <script src="./script/script.js"></script>
 </body>
 </html>

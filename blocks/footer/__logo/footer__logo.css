@@ -7,4 +7,12 @@
     color: #545454;
     margin: 0;
     text-align: left;
+    transition: .7s ease;
 }
+
+  @media (max-width: 535px) {
+    .footer__copyright {
+      font-size: 14px;
+      line-height: 17px;
+    }
+  }
