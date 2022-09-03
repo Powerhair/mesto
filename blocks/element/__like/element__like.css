@@ -6,6 +6,11 @@
     background-color: #fff;
     background-size: contain;
     background-repeat: no-repeat;
+    transition: 0.8s ease;
+}
+
+.element__like:hover {
+    opacity: 0.5;
 }
 
 .element__like:active {
