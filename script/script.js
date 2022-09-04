@@ -1,5 +1,4 @@
 // Объявляем переменные
-// Поля Имя и Работа будут меняться, их объявляем переменной let, остальные const
 
 const popup = document.querySelector('.popup');
 const getTitle = document.querySelector('.profile__title');
@@ -7,8 +6,8 @@ const getText = document.querySelector('.profile__text');
 const buttonEditOpen = document.querySelector('.profile__editButton');
 const buttonEditClose = document.querySelector('.popup__button-exit');
 const editForm = document.querySelector('.popup__container');
-let inputName = editForm.querySelector('.popup__input_name');
-let inputJob = editForm.querySelector('.popup__input_job');
+const inputName = editForm.querySelector('[name="name-input"]');
+const inputJob = editForm.querySelector('[name="job-input"]');
 
 // Проверка создания переменных
 // console.log (popup);
@@ -24,13 +23,13 @@ let inputJob = editForm.querySelector('.popup__input_job');
 // Создаем функции для открытия и закрытия окна popup. В функции открытия окна popup создаем возможность заполнение полей Имя и Работа содержимым со страницы
 
 function openPopup () {
-    popup.classList.add ('popup__opened');
+    popup.classList.add ('popup_opened');
     inputName.value = getTitle.textContent;
     inputJob.value = getText.textContent;
 }
 
 function closePopup () {
-    popup.classList.remove('popup__opened');
+    popup.classList.remove('popup_opened');
 }
 
 // Создаем функцию для кнопки "Отправить", по шаблону из задания

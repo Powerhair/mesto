@@ -8,7 +8,6 @@
     transition: .7s ease;
 }
 
-  
 @media screen and (max-width: 900px) {
     .profile__avatar {
         max-width: 100px;
@@ -16,7 +15,7 @@
         margin-right: 5%;
     }
   }
-  
+
   @media screen and (max-width: 685px) {
     .profile__avatar {
         max-width: 120px;

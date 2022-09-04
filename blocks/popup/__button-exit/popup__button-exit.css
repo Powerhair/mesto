@@ -4,9 +4,10 @@
     border: none;
     font-weight: 400;
     background-image: url(../../../image/close_icon.svg);
+    background-size: 32px;
     background-repeat: no-repeat;
-    right: -32px;
-    top: -32px;
+    right : -40px;
+    top: -40px;
     font-size: 0;
     box-shadow: none;
     color: white;
@@ -26,8 +27,7 @@
     .popup__button-exit {
       top: -35px;
       right: 0;
-      background-image: url(../../../image/close_icon_small.png);
-      max-width: 20px;
-      min-height: 20px;
+      background-size: 20px;
+
     }
   }

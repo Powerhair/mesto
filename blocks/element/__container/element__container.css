@@ -1,5 +1,9 @@
 .element__container {
     display: flex;
-    margin: 25px 15px 31px 21px;
+    align-items: center;
+    padding: 25px 15px 31px 21px;
     justify-content: space-between;
+    background-color: white;
+    border-radius: 0 0 10px 10px;
+    max-width: 246px;
 }

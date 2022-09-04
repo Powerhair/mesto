@@ -12,7 +12,6 @@
     background-color: transparent;
 }
 
-
   @media screen and (max-width: 980px) {
     .profile__addButton {
       width: 20%;

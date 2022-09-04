@@ -3,11 +3,12 @@
     width: 24px;
     height: 24px;
     background-image: url(../../../image/feather.svg);
-    background-color: #000;
+    background-color:transparent;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 10px 10px;
     grid-area: editButton;
+    align-self: center;
 }
 
   @media screen and (max-width: 535px) {
