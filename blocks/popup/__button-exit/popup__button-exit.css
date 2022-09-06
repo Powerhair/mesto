@@ -23,11 +23,12 @@
     opacity: 0.6;
   }
 
-  @media (max-width: 535px) {
+  @media screen and (max-width: 535px) {
     .popup__button-exit {
       top: -35px;
       right: 0;
       background-size: 20px;
-
+      max-width: 20px;
+      min-height: 20px;
     }
   }

@@ -6,8 +6,8 @@ const getText = document.querySelector('.profile__text');
 const buttonEditOpen = document.querySelector('.profile__editButton');
 const buttonEditClose = document.querySelector('.popup__button-exit');
 const editForm = document.querySelector('.popup__container');
-const inputName = editForm.querySelector('[name="name-input"]');
-const inputJob = editForm.querySelector('[name="job-input"]');
+const inputName = document.formPopup.nameInput;
+const inputJob = document.formPopup.jobInput ;
 
 // Проверка создания переменных
 // console.log (popup);
