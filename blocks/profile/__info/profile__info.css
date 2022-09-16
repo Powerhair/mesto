@@ -2,7 +2,7 @@
     display: grid;
     grid-template-areas:
       "title editButton"
-      "texts .";
+      "texts texts";
     grid-template-columns: 1fr min-content;
     column-gap: 18px;
     align-items: baseline;

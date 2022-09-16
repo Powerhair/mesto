@@ -47,3 +47,55 @@ function formSubmitHandler (evt) {
 buttonEditOpen.addEventListener('click', openPopup);
 buttonEditClose.addEventListener('click', closePopup);
 editForm.addEventListener('submit', formSubmitHandler);
+
+const initialCards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+  ]; 
+
+const placesContainer = document.querySelector(".elements");
+const placeTemplate = document.querySelector("#element-template").content;
+
+const placeInfo = initialCards.map(function (item) {
+  return {
+    name: item.name,
+    link: item.link
+  };
+});
+// console.log(placeInfo);
+
+function render() {
+    placeInfo.forEach(renderCard);
+  }
+
+  function renderCard({ name, link }) {
+    const placeElement = placeTemplate.querySelector(".element").cloneNode(true);
+    placeElement.querySelector(".element__title").textContent = name;
+    placeElement.querySelector(".element__image").src = link;
+    placesContainer.prepend(placeElement);
+}
+
+render();
+
