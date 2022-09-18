@@ -7,7 +7,6 @@ const getText = document.querySelector('.profile__text');
 const buttonEditOpen = document.querySelector('.profile__editButton');
 const buttonEditClose = document.querySelector('.popup__button-exit');
 const buttonAddCard = document.querySelector('.profile__addButton');
-const buttonDelete = document.querySelector('.element__trash');
 const editForm = document.querySelector('.popup__container');
 const inputName = document.querySelector('.popup__input_type_name');
 const inputJob = document.querySelector('.popup__input_type_description') ;
@@ -43,6 +42,9 @@ buttonAddCard.addEventListener('click', openPopup);
 buttonEditOpen.addEventListener('click', openPopup);
 buttonEditClose.addEventListener('click', closePopup);
 editForm.addEventListener('submit', formSubmitHandler);
+
+
+
 
 const initialCards = [
     {
@@ -87,11 +89,26 @@ function render() {
   }
 
   function renderCard({ name, link }) {
-    const placeElement = placeTemplate.querySelector(".element").cloneNode(true);
+    const placeElement = placeTemplate.cloneNode(true);
     placeElement.querySelector(".element__title").textContent = name;
     placeElement.querySelector(".element__image").src = link;
     placesContainer.prepend(placeElement);
+
+    setListenersForElement(placeElement);
+  placesContainer.appendChild(placeElement);
 }
 
 render();
 
+
+
+function setListenersForElement(element) {
+  const buttonDelete = document.querySelector('.element__trash');
+  buttonDelete.addEventListener('click', cardDelete);
+}
+
+function cardDelete(event) {
+  const currentElementItem = event.target.closest('.element');
+  currentElementItem.remove();
+ 
+}
