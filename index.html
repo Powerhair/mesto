@@ -40,79 +40,41 @@
             </div>
         </template>
         </section>
-        <!-- <section class="elements">
-            <div class="element">
-                <img src="./image/kchr.png"
-                     alt="Церковь Карачаевск"
-                     class="element__image">
-                <div class="element__container">
-                    <h2 class="element__title">Карачаевск</h2>
-                    <button class="element__like" type="button"></button>
-                </div>
-            </div>
-            <div class="element">
-                <img src="./image/elbrus.png"
-                     alt="Вид на Эльбрус"
-                     class="element__image">
-                <div class="element__container">
-                    <h2 class="element__title">Гора Эльбрус</h2>
-                    <button class="element__like" type="button"></button>
-                </div>
-            </div>
-            <div class="element">
-                <img src="./image/dombai.png"
-                     alt="Домбай"
-                     class="element__image">
-                <div class="element__container">
-                    <h2 class="element__title">Домбай</h2>
-                    <button class="element__like" type="button"></button>
-                </div>
-            </div>
-            <div class="element">
-                <img src="./image/baikal.png"
-                     alt="Скала на озере Байкал"
-                     class="element__image">
-                <div class="element__container">
-                    <h2 class="element__title">Байкал</h2>
-                    <button class="element__like" type="button"></button>
-                </div>
-            </div>
-            <div class="element">
-                <img src="./image/kamchatka.jpg"
-                     alt="Вид на Ключевскую сопку"
-                     class="element__image">
-                <div class="element__container">
-                    <h2 class="element__title">Камчатка</h2>
-                    <button class="element__like" type="button"></button>
-                </div>
-            </div>
-            <div class="element">
-                <img src="./image/altai.png"
-                     alt="Горное озеро на Алтае"
-                     class="element__image">
-                <div class="element__container">
-                    <h2 class="element__title">Алтай</h2>
-                    <button class="element__like" type="button"></button>
-                </div>
-            </div>
-        </section> -->
     </main>
     <footer class="footer">
         <p class="footer__copyright">© 2022 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <!-- открытие popup редактирования профиля -->
+    <div class="popup popup_profile-edit">
         <form class="popup__container" method="post" name="formPopup">
             <h3 class="popup__title">Редактировать профиль</h3>
             <input name="nameInput"
                    value=""
-                   class="popup__input"
+                   class="popup__input popup__input_type_name"
                    type="text"
                    placeholder="Имя">
             <input name="jobInput"
-                   value="" class="popup__input"
+                   value="" class="popup__input popup__input_type_description"
                    type="text"
                    placeholder="Описание">
             <button aria-label="Сохранить" class="popup__button-submit" type="submit">Сохранить</button>
+           <button aria-label="Закрыть" class="popup__button-exit" type="button">Закрыть</button>
+        </form>
+    </div>
+    <!-- открытие popup добавление карточки -->
+    <div class="popup popup_card-add">
+        <form class="popup__container" method="post" name="formPopup">
+            <h3 class="popup__title">Новое место</h3>
+            <input name="nameInput"
+                   value=""
+                   class="popup__input popup__input_type_title"
+                   type="text"
+                   placeholder="Название">
+            <input name="jobInput"
+                   value="" class="popup__input popup__input_type_link"
+                   type="text"
+                   placeholder="Ссылка на картинку">
+            <button aria-label="Сохранить" class="popup__button-submit" type="submit">Создать</button>
            <button aria-label="Закрыть" class="popup__button-exit" type="button">Закрыть</button>
         </form>
     </div>

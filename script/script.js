@@ -1,23 +1,18 @@
 // Объявляем переменные
-
 const popup = document.querySelector('.popup');
+const popupCardAdd = document.querySelector('.popup_card-add');
+const popupProfileEdit = document.querySelector('.popup_profile-edit');
 const getTitle = document.querySelector('.profile__title');
 const getText = document.querySelector('.profile__text');
 const buttonEditOpen = document.querySelector('.profile__editButton');
 const buttonEditClose = document.querySelector('.popup__button-exit');
+const buttonAddCard = document.querySelector('.profile__addButton');
+const buttonDelete = document.querySelector('.element__trash');
 const editForm = document.querySelector('.popup__container');
-const inputName = document.formPopup.nameInput;
-const inputJob = document.formPopup.jobInput ;
-
-// Проверка создания переменных
-// console.log (popup);
-// console.log (getTitle);
-// console.log (getText);
-// console.log (buttonEditClose);
-// console.log (buttonEditOpen);
-// console.log (editForm);
-// console.log (inputName);
-// console.log (inputJob);
+const inputName = document.querySelector('.popup__input_type_name');
+const inputJob = document.querySelector('.popup__input_type_description') ;
+const inputTitle = document.querySelector('.popup__input_type_title');
+const inputLink = document.querySelector('.popup__input_type_link');
 
 
 // Создаем функции для открытия и закрытия окна popup. В функции открытия окна popup создаем возможность заполнение полей Имя и Работа содержимым со страницы
@@ -44,6 +39,7 @@ function formSubmitHandler (evt) {
 
 // Задаем логику работы кнопок открытия/закрытия popup и кнопки submit
 
+buttonAddCard.addEventListener('click', openPopup);
 buttonEditOpen.addEventListener('click', openPopup);
 buttonEditClose.addEventListener('click', closePopup);
 editForm.addEventListener('submit', formSubmitHandler);
@@ -73,7 +69,7 @@ const initialCards = [
       name: 'Байкал',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
-  ]; 
+  ]
 
 const placesContainer = document.querySelector(".elements");
 const placeTemplate = document.querySelector("#element-template").content;
