@@ -150,14 +150,15 @@ function formSubmitHandler(evt) {
 
 function addCardFormSubmitHandler(evt) {
   evt.preventDefault();
-  const name = document.querySelector(".popup__input_type_title");
-  const link = document.querySelector(".popup__input_type_link");
+  const name = document.querySelector(".popup__input_type_title").value;
+  const link = document.querySelector(".popup__input_type_link").value;
   console.log(name);
   initialCards.push({ name, link });
   name.value = "";
   link.value = "";
   closeAddCardPopup();
   render();
+
 }
 
 // Задаем логику работы кнопок открытия/закрытия popup и кнопки submit
@@ -208,6 +209,7 @@ const getPlaceInfo = () =>
     };
   });
 // console.log(placeInfo);
+
 
 function render() {
   clearElements();
