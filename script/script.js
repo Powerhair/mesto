@@ -13,7 +13,7 @@ const editForm = popup.querySelector(".popup__container");
 const addCardForm = popupCardAdd.querySelector(".popup__container");
 const inputName = document.querySelector(".popup__input_type_name");
 const inputJob = document.querySelector(".popup__input_type_description");
-const buttonLike = document.querySelector(".element__like");
+
 
 
 // Создаем функции для открытия и закрытия окна popup. В функции открытия окна popup создаем возможность заполнение полей Имя и Работа содержимым со страницы
@@ -111,6 +111,7 @@ const getPlaceInfo = () =>
   });
 // console.log(getPlaceInfo);
 
+let editingItem = null;
 
 function render() {
   clearElements();
@@ -137,6 +138,8 @@ render();
 function setListenersForElement() {
   const buttonDelete = document.querySelector(".element__trash");
   buttonDelete.addEventListener("click", cardDelete);
+  const buttonLike = document.querySelector("#btnLike");
+  buttonLike.addEventListener("click", changeIcon);
 }
 
 
@@ -146,3 +149,18 @@ function cardDelete(event) {
   initialCards.splice(index, 1);
   currentElementItem.remove();
 }
+
+
+function changeIcon(event) {
+  editingItem = event.target.closest(".element__container");
+
+ const buttonLike = editingItem.querySelector("#btnLike");
+
+  if (buttonLike.classList.contains("element__like")){
+    buttonLike.classList.remove("element__like");
+    buttonLike.classList.add("element__like-active");
+  } else {
+    buttonLike.classList.remove("element__like-active");
+    buttonLike.classList.add("element__like");
+  }
+};
