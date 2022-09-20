@@ -13,9 +13,13 @@ const editForm = popup.querySelector(".popup__container");
 const addCardForm = popupCardAdd.querySelector(".popup__container");
 const inputName = document.querySelector(".popup__input_type_name");
 const inputJob = document.querySelector(".popup__input_type_description");
+const popupImageOpen = document.querySelector(".popup_type_opened-card");
+
 
 
 // Создаем функции для открытия и закрытия окна popup. В функции открытия окна popup создаем возможность заполнение полей Имя и Работа содержимым со страницы
+
+
 
 function openPopup() {
   popup.classList.add("popup_opened");
@@ -106,8 +110,9 @@ const getPlaceInfo = () =>
       link: item.link,
     };
   });
-// console.log(placeInfo);
+// console.log(getPlaceInfo);
 
+let editingItem = null;
 
 function render() {
   clearElements();
@@ -131,24 +136,42 @@ function renderCard({ name, link }) {
 render();
 
 
-function setListenersForElement(element) {
+function setListenersForElement() {
   const buttonDelete = document.querySelector(".element__trash");
   buttonDelete.addEventListener("click", cardDelete);
+  const buttonLike = document.querySelector("#btnLike");
+  buttonLike.addEventListener("click", changeIcon);
+  const imageButton = document.querySelector(".element__image");
+  imageButton.addEventListener("click", openFullSccreen);
 }
+
 
 function cardDelete(event) {
   const currentElementItem = event.target.closest(".element");
+  let index = initialCards.indexOf(currentElementItem);
+  initialCards.splice(index, 1);
   currentElementItem.remove();
 }
 
 
+function changeIcon(event) {
+  editingItem = event.target.closest(".element__container");
 
-function setListenersForElement(element) {
-  const buttonDelete = document.querySelector('.element__trash');
-  buttonDelete.addEventListener('click', cardDelete);
+ const buttonLike = editingItem.querySelector("#btnLike");
+
+  if (buttonLike.classList.contains("element__like")){
+    buttonLike.classList.remove("element__like");
+    buttonLike.classList.add("element__like-active");
+  } else {
+    buttonLike.classList.remove("element__like-active");
+    buttonLike.classList.add("element__like");
+  }
+};
+
+function openFullSccreen(event) {
+  editingItem = event.target.closest(".element");
+  const tapImage = editingItem.querySelector(".element__image");
+  popupImageOpen.classList.add("popup_opened");
+  tapImage.classList.add("popup__photo");
 }
 
-function cardDelete(event) {
-  const currentElementItem = event.target.closest('.element');
-  currentElementItem.remove();
-}
