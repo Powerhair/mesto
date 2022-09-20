@@ -77,7 +77,18 @@
             <button aria-label="Сохранить" class="popup__button-submit" type="submit">Создать</button>
            <button aria-label="Закрыть" class="popup__button-exit" type="button">Закрыть</button>
         </form>
-    </div>
+        <!-- открытие popup добавление карточки -->
+        <div class="popup popup_type_opened-card">
+            <figure class="popup__image-container">
+              <img class="popup__photo" src="#" alt="" />
+              <button
+                class="popup__close-button"
+                type="button"
+                name="image-popup-close-button"
+              ></button>
+              <figcaption class="popup__image-title"></figcaption>
+            </figure>
+          </div>
     <script src="./script/script.js"></script>
 </body>
 </html>

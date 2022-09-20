@@ -13,6 +13,7 @@ const editForm = popup.querySelector(".popup__container");
 const addCardForm = popupCardAdd.querySelector(".popup__container");
 const inputName = document.querySelector(".popup__input_type_name");
 const inputJob = document.querySelector(".popup__input_type_description");
+const popupImageOpen = document.querySelector(".popup_type_opened-card");
 
 
 
@@ -140,6 +141,8 @@ function setListenersForElement() {
   buttonDelete.addEventListener("click", cardDelete);
   const buttonLike = document.querySelector("#btnLike");
   buttonLike.addEventListener("click", changeIcon);
+  const imageButton = document.querySelector(".element__image");
+  imageButton.addEventListener("click", openFullSccreen);
 }
 
 
@@ -164,3 +167,11 @@ function changeIcon(event) {
     buttonLike.classList.add("element__like");
   }
 };
+
+function openFullSccreen(event) {
+  editingItem = event.target.closest(".element");
+  const tapImage = editingItem.querySelector(".element__image");
+  popupImageOpen.classList.add("popup_opened");
+  tapImage.classList.add("popup__photo");
+}
+
