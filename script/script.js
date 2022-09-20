@@ -143,13 +143,13 @@ function setListenersForElement() {
   buttonLike.addEventListener("click", changeIcon);
   const imageButton = document.querySelector(".element__image");
   imageButton.addEventListener("click", openFullSccreen);
+  const buttonCloseFullScreen = document.querySelector(".popup__close-button")
+  buttonCloseFullScreen.addEventListener("click", closeFullScreen);
 }
 
 
 function cardDelete(event) {
   const currentElementItem = event.target.closest(".element");
-  let index = initialCards.indexOf(currentElementItem);
-  initialCards.splice(index, 1);
   currentElementItem.remove();
 }
 
@@ -173,5 +173,18 @@ function openFullSccreen(event) {
   const tapImage = editingItem.querySelector(".element__image");
   popupImageOpen.classList.add("popup_opened");
   tapImage.classList.add("popup__photo");
+  addImages()
 }
 
+function addImages({ name, link }) {
+  const popupPhoto = document.querySelector(".popup_type_opened-card").content;
+  const placeElement = popupPhoto.cloneNode(true);
+  placeElement.querySelector(".popup__photo").src = link;
+  placeElement.querySelector(".popup__image-title").text = name;
+}
+
+function closeFullScreen (event) {
+  const currentElementItem = event.target.closest(".popup__image-container");
+  currentElementItem.remove();
+  popupImageOpen.classList.remove("popup_opened");
+}
