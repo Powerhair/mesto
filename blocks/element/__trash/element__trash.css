@@ -12,4 +12,9 @@
     position: absolute;
     top: 20px;
     right: 20px;
+    transition: opacity .4s ease;
 }
+
+  .element__trash:hover {
+    opacity: .6;
+  }

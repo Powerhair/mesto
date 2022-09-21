@@ -33,6 +33,7 @@
     <footer class="footer">
         <p class="footer__copyright">© 2022 Mesto Russia</p>.
     </footer>
+    <!-- template -->
     <template id="element-template">
         <div class="element">
             <button class="element__trash" id="btnDelete" type="button"></button>
@@ -58,12 +59,12 @@
                    type="text"
                    placeholder="Описание">
             <button aria-label="Сохранить" class="popup__button-submit" type="submit">Сохранить</button>
-           <button aria-label="Закрыть" class="popup__button-exit" type="button">Закрыть</button>
+           <button  class="popup__close popup__close_profile" type="button"></button>
         </form>
     </div>
     <!-- открытие popup добавление карточки -->
     <div class="popup popup_card-add">
-        <form class="popup__container" method="post" name="formPopup">
+        <form class="popup__container popup__form" method="post" name="formPopup">
             <h3 class="popup__title">Новое место</h3>
             <input name="nameInput"
                    value=""
@@ -75,18 +76,19 @@
                    type="text"
                    placeholder="Ссылка на картинку">
             <button aria-label="Сохранить" class="popup__button-submit" type="submit">Создать</button>
-           <button aria-label="Закрыть" class="popup__button-exit" type="button">Закрыть</button>
+           <button  class="popup__close popup__close_card" type="button"></button>
         </form>
-        <!-- открытие popup добавление карточки -->
-        <div class="popup popup_type_opened-card">
+    </div>
+        <!-- открытие popup fullscreen -->
+        <div class="popup popup_fullscreen">
             <div class="popup__image-container">
-              <img class="popup__photo" src="#" alt="" />
+              <img class="popup__image" src="#" alt="Фото места" />
               <button
-                class="popup__close-button"
+                class="popup__close popup__close-button"
                 type="button"
                 name="image-popup-close-button"
               ></button>
-              <p class="popup__image-title"></p>
+              <h3 class="popup__image-title"></h3>
             </div>
           </div>
     <script src="./script/script.js"></script>
