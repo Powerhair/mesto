@@ -5,7 +5,6 @@
     border: none;
     background-size: contain;
     background-repeat: no-repeat;
-    transition: 0.8s ease;
     cursor: pointer;
     background-color:transparent;
     flex-shrink: 0;
