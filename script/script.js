@@ -123,13 +123,13 @@ const render = (cardData) => {
   };
 
   function editOpenForm() {
-    openPopup(buttonPopupProfileEdit);
+    openPopup(popupProfile);
     inputName.value = getTitle.textContent;
     inputJob.value = getText.textContent;
   };
 
   function closePopupFormEdit() {
-    closePopup(buttonPopupProfileEdit);
+    closePopup(popupProfile);
   };
 
    function closePopupPhoto() {
@@ -155,7 +155,7 @@ function submitHandlerEdit(event) {
   event.preventDefault();
   getTitle.textContent = inputName.value;
   getText.textContent = inputJob.value;
-  closePopup(buttonPopupProfileEdit);
+  closePopup(popupProfile);
 };
 
   /* функция новое место */
