@@ -9,7 +9,7 @@ const buttonEditOpen = document.querySelector(".profile__editButton");
 // Объявляем переменные для popup
 
 const popupProfile = document.querySelector(".popup-profile");
-const editContainer = document.querySelector(".popup__container");
+const formElement = document.querySelector(".form");
 const editForm = document.querySelector(".popup__form")
 const buttonPopupCardClose = document.querySelector(".popup__close_profile");
 const popupProfileEdit = document.querySelector(".popup_profile-edit");
@@ -17,6 +17,8 @@ const inputName = document.querySelector(".popup__input_type_name");
 const inputJob = document.querySelector(".popup__input_type_description");
 const buttonEditClose = document.querySelector(".popup__button-exit");
 const buttonSubmit = document.querySelector(".popup__button-submit");
+const popup = document.querySelector(".popup");
+const formInput = formElement.querySelector(".form__input");
 
 // Объявляем переменные для popup добавления карточки
 
@@ -37,6 +39,11 @@ const popupButtonCloseImage = document.querySelector(".popup__close-button");
 
 const elementTemplate = document.querySelector("#element-template").content.querySelector(".element");
 const elements = document.querySelector(".elements");
+
+//Переменные для работы с формой
+
+const formEdit = document.forms.formEdit;
+const formAdd = document.forms.formAdd;
 
 // массив с карточками
 
@@ -171,8 +178,94 @@ function submitHandlerEdit(event) {
 
   editForm.addEventListener("submit", submitAddCard);
   buttonEditOpen.addEventListener("click", editOpenForm);
-  editContainer.addEventListener("submit", submitHandlerEdit);
+  formElement.addEventListener("submit", submitHandlerEdit);
   buttonAddCard.addEventListener("click", openFormAddPhoto);
   popupButtonCloseImage.addEventListener("click", closePopupPhoto);
   buttonAddClose.addEventListener("click", closePopupAddPhoto);
   buttonPopupCardClose.addEventListener("click", closePopupFormEdit);
+  
+  popupImageOpen.addEventListener("click", closeOverlay);
+
+ 
+
+  function closeOverlay (evt){
+    evt.target.classList.toggle("popup_opened");
+  };
+
+  const errorMessages = {
+    empty: 'Вы пропустили это поле.',
+    wrongLength: 'Минимальное количество символов 2. Длина текста сейчас 1 символ.',
+    wrongUrl: 'Введите адрес сайта.',
+  };
+
+  function isValid(input) {
+    input.setCustomValidity("");
+    
+    if (input.validity.valueMessages) {
+      input.setCustomValidity(errorMessages.empty);
+
+      return false;
+    };
+    if (input.validity.tooLong || input.validity.tooShort) {
+      input.setCustomValidity(errorMessages.wrongLength);
+
+      return false;
+    };
+
+    if (input.validity.typeMissmatch && input.type === 'url') {
+      input.setCustomValidity(errorMessages.wrongUrl);
+
+      return false;
+    };
+    return input.checkValidity();
+  };
+
+  function isValidField(input) {
+    const errorSpan = input.parentNode.querySelector(`#${input.id}-error`);
+    isValid(input);
+    errorSpan.textContent = input.validationMessage;
+  };
+
+  function setSubmitButton(button, state) {
+    if (state){
+      button.removeAttribute('disabled');
+      button.classList.remove('popup__button_invalid');
+    }else {
+      button.setAttribute('disabled', true);
+      button.classList.add('popup__button_invalid');
+    }
+  }
+
+  function handleValidateInput(evt) {
+   
+    const currentInput = evt.currentTarget;
+    const submitButton = currentInput.querySelector('.popup__button-submit')
+  
+    isValidField(evt.target)
+
+    if (currentInput.checkValidity()) {
+      setSubmitButton(submitButton, true)
+    }else{
+      setSubmitButton(submitButton, false)
+    }
+  };
+
+
+  function sendForm(evt) {
+    evt.preventDefault;
+    
+    const currentForm = evt.target;
+
+    if (currentForm.checkValidity()) {
+      console.log('Форма успешно отправлена');
+      evt.target.reset();
+    } else {
+      console.log('Что-то пошло не так')
+    }
+  }
+
+  formEdit.addEventListener('submit', sendForm);
+  formEdit.addEventListener('input', handleValidateInput);
+
+  formAdd.addEventListener('submit', sendForm);
+  formAdd.addEventListener('input', handleValidateInput);

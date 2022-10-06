@@ -48,34 +48,54 @@
     </template>
     <!-- открытие popup редактирования профиля -->
     <div class="popup popup-profile">
-        <form class="popup__container" method="post" name="formPopup">
+        <form class="form" name="formEdit" novalidate>
             <h3 class="popup__title">Редактировать профиль</h3>
             <input name="nameInput"
                    value=""
-                   class="popup__input popup__input_type_name"
+                   id="name-input"
+                   class="form__input popup__input_type_name"
                    type="text"
-                   placeholder="Имя">
+                   placeholder="Имя"
+                   required
+                   minlength="2"
+                   maxlength="40">
+                   <span id="name-input-error" class="form-input-message-error"></span>
             <input name="jobInput"
-                   value="" class="popup__input popup__input_type_description"
+                   value=""
+                   id="job-input"
+                   class="form__input popup__input_type_description"
                    type="text"
-                   placeholder="Описание">
+                   placeholder="Описание"
+                   required
+                   minlength="2"
+                   maxlength="200">
+                   <span id="job-input-error" class="form-input-message-error"></span>
             <button aria-label="Сохранить" class="popup__button-submit" type="submit">Сохранить</button>
            <button  class="popup__close popup__close_profile" type="button"></button>
         </form>
     </div>
     <!-- открытие popup добавление карточки -->
     <div class="popup popup_card-add">
-        <form class="popup__container popup__form" method="post" name="formPopup">
+        <form class="form popup__form" name="formAdd" novalidate>
             <h3 class="popup__title">Новое место</h3>
-            <input name="nameInput"
+            <input name="titleInput"
+                   id="title-input"
                    value=""
-                   class="popup__input popup__input_type_title"
+                   class="form__input popup__input_type_title"
                    type="text"
-                   placeholder="Название">
-            <input name="jobInput"
-                   value="" class="popup__input popup__input_type_link"
-                   type="text"
-                   placeholder="Ссылка на картинку">
+                   placeholder="Название"
+                   required
+                   minlength="2"
+                   maxlength="30">
+                   <span id="title-input-error" class="form-input-message-error"></span>
+            <input name="linkInput"
+                   id="link-input"
+                   value="" 
+                   class="form__input popup__input_type_link"
+                   type="url"
+                   placeholder="Ссылка на картинку"
+                   required>
+                   <span id="link-input-error" class="form-input-message-error"></span>
             <button aria-label="Сохранить" class="popup__button-submit" type="submit">Создать</button>
            <button  class="popup__close popup__close_card" type="button"></button>
         </form>
