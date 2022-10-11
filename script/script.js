@@ -10,7 +10,6 @@ const buttonEditOpen = document.querySelector(".profile__editButton");
 
 const popupProfile = document.querySelector(".popup-profile");
 const formElement = document.querySelector(".form");
-const editForm = document.querySelector(".popup__form")
 const buttonPopupCardClose = document.querySelector(".popup__close_profile");
 const popupProfileEdit = document.querySelector(".popup_profile-edit");
 const inputName = document.querySelector(".popup__input_type_name");
@@ -122,6 +121,13 @@ const render = (cardData) => {
   // Создаем функцию открытия и закрытия popup
 
   function openPopup(elem) {
+    // const form = elem.querySelector('form');
+    // if (form?.name === 'formAdd') {
+    //   const button = form.querySelector('.popup__button-submit');
+    //   button.classList.add('popup__button_invalid')
+    //   button.setAttribute('disabled', true);
+    // }
+  
     elem.classList.add("popup_opened");
   };
 
@@ -133,6 +139,7 @@ const render = (cardData) => {
     openPopup(popupProfile);
     inputName.value = getTitle.textContent;
     inputJob.value = getText.textContent;
+    
   };
 
   function closePopupFormEdit() {
@@ -176,7 +183,7 @@ function submitHandlerEdit(event) {
     closePopup(popupCardAdd);
   };
 
-  editForm.addEventListener("submit", submitAddCard);
+  formAdd.addEventListener("submit", submitAddCard);
   buttonEditOpen.addEventListener("click", editOpenForm);
   formElement.addEventListener("submit", submitHandlerEdit);
   buttonAddCard.addEventListener("click", openFormAddPhoto);
@@ -184,88 +191,126 @@ function submitHandlerEdit(event) {
   buttonAddClose.addEventListener("click", closePopupAddPhoto);
   buttonPopupCardClose.addEventListener("click", closePopupFormEdit);
   
+// Закрытие попапов по клику на оверлей или нажатию клавиши "Escape"
+
   popupImageOpen.addEventListener("click", closeOverlay);
+  popupCardAdd.addEventListener("click", closeOverlay);
+  popupProfile.addEventListener('click', closeOverlay);
 
- 
+  document.body.addEventListener('keyup', (event) => {
+    if (event.key === 'Escape') { 
+      closeOverlay(popupImageOpen);
+      closeOverlay(popupCardAdd);
+      closeOverlay(popupProfile);
+    }
+  });
 
-  function closeOverlay (evt){
-    evt.target.classList.toggle("popup_opened");
+  function closeOverlay (evt) {
+    
+    const target = evt?.target || evt;
+
+    const classList = Array.prototype.slice.call(target.classList,0);
+
+    if (classList.includes('popup_opened')) {
+      target.classList.remove("popup_opened");
+    }
   };
 
-  const errorMessages = {
+    const errorMessages = {
     empty: 'Вы пропустили это поле.',
     wrongLength: 'Минимальное количество символов 2. Длина текста сейчас 1 символ.',
     wrongUrl: 'Введите адрес сайта.',
   };
 
-  function isValid(input) {
-    input.setCustomValidity("");
+  function isValid(inputElement) {
+    inputElement.setCustomValidity("");
     
-    if (input.validity.valueMessages) {
-      input.setCustomValidity(errorMessages.empty);
+    if (inputElement.validity.valueMessages) {
+      inputElement.setCustomValidity(errorMessages.empty);
 
       return false;
     };
-    if (input.validity.tooLong || input.validity.tooShort) {
-      input.setCustomValidity(errorMessages.wrongLength);
+    if (inputElement.validity.tooLong || inputElement.validity.tooShort) {
+      inputElement.setCustomValidity(errorMessages.wrongLength);
 
       return false;
     };
 
-    if (input.validity.typeMissmatch && input.type === 'url') {
-      input.setCustomValidity(errorMessages.wrongUrl);
+    if (inputElement.validity.typeMissmatch && inputElement.type === 'url') {
+      inputElement.setCustomValidity(errorMessages.wrongUrl);
 
       return false;
     };
-    return input.checkValidity();
+    return inputElement.checkValidity();
   };
 
-  function isValidField(input) {
-    const errorSpan = input.parentNode.querySelector(`#${input.id}-error`);
-    isValid(input);
-    errorSpan.textContent = input.validationMessage;
+
+  const showInputError = (formElement, inputElement) => {
+    const errorElement = formElement.parentNode.querySelector(`#${inputElement.id}-error`);
+    inputElement.classList.add('form__input-invalid');
+    isValid(inputElement);
+    errorElement.textContent = inputElement.validationMessage;
+    
   };
-
-  function setSubmitButton(button, state) {
-    if (state){
-      button.removeAttribute('disabled');
-      button.classList.remove('popup__button_invalid');
-    }else {
-      button.setAttribute('disabled', true);
-      button.classList.add('popup__button_invalid');
-    }
-  }
-
-  function handleValidateInput(evt) {
-   
-    const currentInput = evt.currentTarget;
-    const submitButton = currentInput.querySelector('.popup__button-submit')
   
-    isValidField(evt.target)
-
-    if (currentInput.checkValidity()) {
-      setSubmitButton(submitButton, true)
-    }else{
-      setSubmitButton(submitButton, false)
+  const hideInputError = (formElement, inputElement) => {
+    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.remove('form__input-invalid');
+  };
+  
+  const checkInputValidity = (formElement, inputElement) => {
+    if (!inputElement.validity.valid) {
+      showInputError(formElement, inputElement, inputElement.validationMessage);
+    } else {
+      hideInputError(formElement, inputElement);
     }
   };
-
-
-  function sendForm(evt) {
-    evt.preventDefault;
-    
-    const currentForm = evt.target;
-
-    if (currentForm.checkValidity()) {
-      console.log('Форма успешно отправлена');
-      evt.target.reset();
-    } else {
-      console.log('Что-то пошло не так')
-    }
+  
+  const setEventListeners = (formElement) => {
+    const inputList = Array.from(formElement.querySelectorAll('.form__input'));
+    const buttonElement = formElement.querySelector('.popup__button-submit');
+  
+    // чтобы проверить состояние кнопки в самом начале
+    toggleButtonState(inputList, buttonElement);
+  
+    inputList.forEach((inputElement) => {
+      inputElement.addEventListener('input', function () {
+        checkInputValidity(formElement, inputElement);
+        // чтобы проверять его при изменении любого из полей
+        toggleButtonState(inputList, buttonElement);
+      });
+    });
+  };
+  
+  const enableValidation = () => {
+    const formList = Array.from(document.querySelectorAll('.form'));
+    formList.forEach((formElement) => {
+      formElement.addEventListener('submit', function (evt) {
+        evt.preventDefault();
+      });
+  
+      const fieldsetList = Array.from(formElement.querySelectorAll('.form__set'));
+  
+  fieldsetList.forEach((fieldSet) => {
+    setEventListeners(fieldSet);
+  });
+  
+    });
+  };
+  
+  enableValidation();
+  
+  function hasInvalidInput(inputList) {
+    return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
   }
+  
+  function toggleButtonState(inputList, buttonElement) {
+    if (hasInvalidInput(inputList)) {
 
-  formEdit.addEventListener('submit', sendForm);
-  formEdit.addEventListener('input', handleValidateInput);
-
-  formAdd.addEventListener('submit', sendForm);
-  formAdd.addEventListener('input', handleValidateInput);
+    buttonElement.classList.add('popup__button_invalid');
+  } else {
+    buttonElement.classList.remove('popup__button_invalid');
+  }
+  }

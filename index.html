@@ -49,6 +49,7 @@
     <!-- открытие popup редактирования профиля -->
     <div class="popup popup-profile">
         <form class="form" name="formEdit" novalidate>
+            <fieldset class="form__set">
             <h3 class="popup__title">Редактировать профиль</h3>
             <input name="nameInput"
                    value=""
@@ -71,12 +72,14 @@
                    maxlength="200">
                    <span id="job-input-error" class="form-input-message-error"></span>
             <button aria-label="Сохранить" class="popup__button-submit" type="submit">Сохранить</button>
-           <button  class="popup__close popup__close_profile" type="button"></button>
+            <button  class="popup__close popup__close_profile" type="button"></button>
+            </fieldset>
         </form>
     </div>
     <!-- открытие popup добавление карточки -->
     <div class="popup popup_card-add">
-        <form class="form popup__form" name="formAdd" novalidate>
+        <form class="form" name="formAdd" novalidate>
+            <fieldset class="form__set">
             <h3 class="popup__title">Новое место</h3>
             <input name="titleInput"
                    id="title-input"
@@ -97,7 +100,8 @@
                    required>
                    <span id="link-input-error" class="form-input-message-error"></span>
             <button aria-label="Сохранить" class="popup__button-submit" type="submit">Создать</button>
-           <button  class="popup__close popup__close_card" type="button"></button>
+            <button  class="popup__close popup__close_card" type="button"></button>
+            </fieldset>
         </form>
     </div>
         <!-- открытие popup fullscreen -->
@@ -113,5 +117,6 @@
             </div>
           </div>
     <script src="./script/script.js"></script>
+    <!-- <script src="./script/validation.js"></script> -->
 </body>
 </html>
