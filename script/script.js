@@ -12,8 +12,8 @@ const popupProfile = document.querySelector(".popup-profile");
 const formElement = document.querySelector(".form");
 const buttonPopupCardClose = document.querySelector(".popup__close_profile");
 const popupProfileEdit = document.querySelector(".popup_profile-edit");
-const inputName = document.querySelector(".popup__input_type_name");
-const inputJob = document.querySelector(".popup__input_type_description");
+const inputName = document.querySelector(".popup__input_type-name");
+const inputJob = document.querySelector(".popup__input_type-description");
 const buttonEditClose = document.querySelector(".popup__button-exit");
 const buttonSubmit = document.querySelector(".popup__button-submit");
 const popup = document.querySelector(".popup");
@@ -22,8 +22,8 @@ const formInput = formElement.querySelector(".form__input");
 // Объявляем переменные для popup добавления карточки
 
 const popupCardAdd = document.querySelector(".popup_card-add");
-const popupInputPlaceTitle = document.querySelector(".popup__input_type_title");
-const popupInputPlaceLink = document.querySelector(".popup__input_type_link");
+const popupInputPlaceTitle = document.querySelector(".popup__input_type-title");
+const popupInputPlaceLink = document.querySelector(".popup__input_type-link");
 const addCardForm = document.querySelector(".popup__container");
 const buttonAddClose = document.querySelector(".popup__close_card");
 
