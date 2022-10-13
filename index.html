@@ -49,7 +49,6 @@
     <!-- открытие popup редактирования профиля -->
     <div class="popup popup-profile">
         <form class="form" name="formEdit" novalidate>
-            <fieldset class="form__set">
             <h3 class="popup__title">Редактировать профиль</h3>
             <input name="nameInput"
                    value=""
@@ -60,7 +59,9 @@
                    required
                    minlength="2"
                    maxlength="40">
-                   <span id="name-input-error" class="form-input-message-error"></span>
+                   <div class="form__error-conteiner">
+                        <span id="name-input-error" class="form-input-message-error"></span>
+                   </div>
             <input name="jobInput"
                    value=""
                    id="job-input"
@@ -70,16 +71,16 @@
                    required
                    minlength="2"
                    maxlength="200">
-                   <span id="job-input-error" class="form-input-message-error"></span>
+                   <div class="form__error-conteiner">
+                        <span id="job-input-error" class="form-input-message-error"></span>
+                   </div>
             <button aria-label="Сохранить" class="popup__button-submit" type="submit">Сохранить</button>
             <button  class="popup__close popup__close_profile" type="button"></button>
-            </fieldset>
         </form>
     </div>
     <!-- открытие popup добавление карточки -->
     <div class="popup popup_card-add">
         <form class="form" name="formAdd" novalidate>
-            <fieldset class="form__set">
             <h3 class="popup__title">Новое место</h3>
             <input name="titleInput"
                    id="title-input"
@@ -90,7 +91,9 @@
                    required
                    minlength="2"
                    maxlength="30">
-                   <span id="title-input-error" class="form-input-message-error"></span>
+                   <div class="form__error-conteiner">
+                        <span id="title-input-error" class="form-input-message-error"></span>
+                   </div>
             <input name="linkInput"
                    id="link-input"
                    value="" 
@@ -98,10 +101,11 @@
                    type="url"
                    placeholder="Ссылка на картинку"
                    required>
-                   <span id="link-input-error" class="form-input-message-error"></span>
+                   <div class="form__error-conteiner">
+                        <span id="link-input-error" class="form-input-message-error"></span>
+                   </div>
             <button aria-label="Сохранить" class="popup__button-submit" type="submit">Создать</button>
             <button  class="popup__close popup__close_card" type="button"></button>
-            </fieldset>
         </form>
     </div>
         <!-- открытие popup fullscreen -->

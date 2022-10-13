@@ -54,7 +54,6 @@
 @import url(../blocks/popup/__image-container/popup__image-container.css);
 @import url(../blocks/popup/__image/popup__image.css);
 @import url(../blocks/popup/__fullscreen/popup__fullscreen.css);
-
 @import url(../blocks/popup/__button-submit/popup__button_invalid.css);
 
 
@@ -65,3 +64,4 @@
 @import url(../blocks/form/__input/form__input-invalid.css);
 @import url(../blocks/form/__set/form__set.css);
 @import url(../blocks/form/form-input-message-error-activ.css);
+@import url(../blocks/form/__error/form__error-container.css);
