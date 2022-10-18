@@ -56,19 +56,27 @@ const enableValidation = (settingList) => {
 
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
+  return !inputElement.validity.valid;
   });
 };
 
 const toggleButtonState = (inputList, buttonElement, settingList) => {
   if(hasInvalidInput(inputList)) {
-    buttonElement.classList.add(settingList.inactiveButtonClass);
-    buttonElement.disabled = true;
+    disabledButton(buttonElement, settingList);
   }
   else {
-    buttonElement.classList.remove(settingList.inactiveButtonClass);
-    buttonElement.disabled = false;
+    enabledButton(buttonElement, settingList);
   }
+};
+
+const disabledButton = (buttonElement, settingList) => {
+   buttonElement.classList.add(settingList.inactiveButtonClass);
+   buttonElement.disabled = true;
+};
+
+const enabledButton = (buttonElement, settingList) => {
+   buttonElement.classList.remove(settingList.inactiveButtonClass);
+   buttonElement.disabled = false;
 };
   
 enableValidation(settingList);

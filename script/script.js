@@ -10,7 +10,6 @@ const buttonEditOpen = document.querySelector(".profile__editButton");
 
 const popups = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector(".popup-profile");
-const formElement = document.querySelector(".form");
 const buttonPopupCardClose = document.querySelector(".popup__close_profile");
 const popupProfileEdit = document.querySelector(".popup_profile-edit");
 const inputName = document.querySelector(".form__name");
@@ -18,7 +17,9 @@ const inputJob = document.querySelector(".form__description");
 const buttonEditClose = document.querySelector(".popup__button-exit");
 const buttonSubmit = document.querySelector(".popup__button-submit");
 const popup = document.querySelector(".popup");
-const formInput = formElement.querySelector(".form__input");
+const formInput = document.querySelector(".form__input");
+const formEdit = document.forms.formEdit;
+const formAdd = document.forms.formAdd;
 
 // Объявляем переменные для popup добавления карточки
 
@@ -39,11 +40,6 @@ const popupButtonCloseImage = document.querySelector(".popup__close-button");
 
 const elementTemplate = document.querySelector("#element-template").content.querySelector(".element");
 const elements = document.querySelector(".elements");
-
-//Переменные для работы с формой
-
-const formEdit = document.forms.formEdit;
-const formAdd = document.forms.formAdd;
 
 // массив с карточками
 
@@ -95,11 +91,10 @@ const createCard = (cardData) => {
     openPopupPhoto();
   }
 
-      elementImgCard.addEventListener("click", clickCardListener);
-      elementDelete.addEventListener("click", deleteCard);
-      likeElement.addEventListener("click", tapLike);
-
-      return newCard;
+    elementImgCard.addEventListener("click", clickCardListener);
+    elementDelete.addEventListener("click", deleteCard);
+    likeElement.addEventListener("click", tapLike);
+    return newCard;
   };
 
   const deleteCard = (event) => {
@@ -189,7 +184,7 @@ function submitHandlerEdit(event) {
 
   formAdd.addEventListener("submit", submitAddCard);
   buttonEditOpen.addEventListener("click", openPopupEdit);
-  formElement.addEventListener("submit", submitHandlerEdit);
+  formEdit.addEventListener("submit", submitHandlerEdit);
   buttonAddCard.addEventListener("click", openFormAddPhoto);
   popupButtonCloseImage.addEventListener("click", closePopupPhoto);
   buttonAddClose.addEventListener("click", closePopupAddPhoto);

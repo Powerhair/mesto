@@ -7,3 +7,7 @@
     color: white;
 }
 
+.element__image:hover {
+    cursor: pointer;
+}
+
