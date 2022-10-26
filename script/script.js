@@ -1,3 +1,5 @@
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
 
 // Объявляем переменные для profile
 
@@ -11,13 +13,9 @@ const buttonEditOpen = document.querySelector(".profile__editButton");
 const popups = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector(".popup-profile");
 const buttonPopupCardClose = document.querySelector(".popup__close_profile");
-const popupProfileEdit = document.querySelector(".popup_profile-edit");
 const inputName = document.querySelector(".form__name");
 const inputJob = document.querySelector(".form__description");
-const buttonEditClose = document.querySelector(".popup__button-exit");
-const buttonSubmit = document.querySelector(".popup__button-submit");
-const popup = document.querySelector(".popup");
-const formInput = document.querySelector(".form__input");
+const formElementEdit = document.querySelector(".form")
 const formEdit = document.forms.formEdit;
 const formAdd = document.forms.formAdd;
 
@@ -26,7 +24,6 @@ const formAdd = document.forms.formAdd;
 const popupCardAdd = document.querySelector(".popup_card-add");
 const popupInputPlaceTitle = document.querySelector(".form__title");
 const popupInputPlaceLink = document.querySelector(".form__link");
-const addCardForm = document.querySelector(".popup__container");
 const buttonAddClose = document.querySelector(".popup__close_card");
 
 // Объявляем переменные для popup открытия fullscreen
@@ -38,8 +35,16 @@ const popupButtonCloseImage = document.querySelector(".popup__close-button");
 
 //Объявляем переменные template
 
-const elementTemplate = document.querySelector("#element-template").content.querySelector(".element");
 const elements = document.querySelector(".elements");
+
+const settingList = ({
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".popup__button-submit",
+  inactiveButtonClass: "popup__button_invalid",
+  inputErrorClassActiv: 'form-input-message-error-activ',
+  inputErrorClass: "form__input-invalid",
+});
 
 // массив с карточками
 
@@ -70,48 +75,46 @@ const initialCards = [
   },
 ];
 
-
-/* добавление карточек */
-const createCard = (cardData) => {
-  const newCard = elementTemplate.cloneNode(true);
-  const titleNewElement = newCard.querySelector(".element__title");
-  const likeElement = newCard.querySelector(".element__like");
-  const elementDelete = newCard.querySelector(".element__trash");
-  const elementImgCard = newCard.querySelector(".element__image");
-  const titleElement = newCard.querySelector(".element__title");
-
-  elementImgCard.src = cardData.link;
-  elementImgCard.alt = cardData.name;
-  titleNewElement.textContent = cardData.name;
-
-  function clickCardListener() {
-    popupImage.src = elementImgCard.src;
-    popupImage.alt = titleElement.textContent; //передаем в alt изображения название фотографии
-    popupImageTitle.textContent = titleElement.textContent;
-    openPopupPhoto();
-  }
-
-    elementImgCard.addEventListener("click", clickCardListener);
-    elementDelete.addEventListener("click", deleteCard);
-    likeElement.addEventListener("click", tapLike);
-    return newCard;
+const submitAddCard = (evt) => {
+  evt.preventDefault();
+  const addCard = {
+   name: popupInputPlaceTitle.value,
+   link: popupInputPlaceLink.value,
   };
 
-  const deleteCard = (event) => {
-    event.target.closest(".element").remove();
-  };
+  const card = new Card(addCard, "#element-template", openPopupPhoto);
+  const elementsCardTemplate = card.generateCard();
+  elements.prepend(elementsCardTemplate);
+  closePopup(popupCardAdd);
+  formAdd.reset();
+  saveButtonInactive();
+};
 
-  const tapLike = (event) => {
-    event.target.classList.toggle("element__like-active");
-  };
+function saveButtonInactive() {
+  const buttonSaveAddCard = formAdd.querySelector(".popup__button-submit");
+  buttonSaveAddCard.classList.add(settingList.inactiveButtonClass);
+  buttonSaveAddCard.disabled = true;
+}
 
-  const renderElement = (cardData) => {
-    elements.prepend(createCard(cardData));
-  };
+buttonAddClose.addEventListener("click", () =>
+  closePopup(popupCardAdd)
+);
+formAdd.addEventListener("submit", submitAddCard);
 
-  initialCards.forEach((cardData) => {
-    renderElement(cardData);
-  });
+
+initialCards.forEach((item) => {
+  const card = new Card(item, "#element-template", openPopupPhoto);
+  const elementsCardTemplate = card.generateCard();
+
+  elements.append(elementsCardTemplate);
+});
+
+function openPopupPhoto(name, link) {
+  popupImage.src = link;
+  popupImageTitle.textContent = name;
+  popupImage.alt = name
+  return openPopup(popupFullscreen);
+}
 
 
   // Создаем функцию открытия и закрытия popup
@@ -137,6 +140,7 @@ const createCard = (cardData) => {
   function openPopupEdit() {
     openPopup(popupProfile);
     inputName.value = profileTitle.textContent;
+
     inputJob.value = profileText.textContent;
     
   };
@@ -153,9 +157,7 @@ const createCard = (cardData) => {
     closePopup(popupCardAdd);
   };
 
-   function openPopupPhoto() {
-     openPopup(popupFullscreen);
-   }
+
 
   function openFormAddPhoto() {
     inputName.value = profileTitle.textContent;
@@ -172,17 +174,16 @@ function submitHandlerEdit(event) {
 };
 
   /* функция новое место */
-  const submitAddCard = (event) => {
-    event.preventDefault();
-    renderElement({
-      name: popupInputPlaceTitle.value,
-      link: popupInputPlaceLink.value,
-    });
-    event.target.reset();
-    closePopup(popupCardAdd);
-  };
+  // const submitAddCard = (event) => {
+  //   event.preventDefault();
+  //   renderElement({
+  //     name: popupInputPlaceTitle.value,
+  //     link: popupInputPlaceLink.value,
+  //   });
+  //   event.target.reset();
+  //   closePopup(popupCardAdd);
+  // };
 
-  formAdd.addEventListener("submit", submitAddCard);
   buttonEditOpen.addEventListener("click", openPopupEdit);
   formEdit.addEventListener("submit", submitHandlerEdit);
   buttonAddCard.addEventListener("click", openFormAddPhoto);
@@ -197,3 +198,8 @@ const closeByEscape = (evt) => {
     closePopup(openedNowPopup);
   };
 };
+
+const formValidatorEdit = new FormValidator(settingList, formElementEdit);
+const formValidatorAddCard = new FormValidator(settingList, formAdd);
+formValidatorEdit.enableValidation();
+formValidatorAddCard.enableValidation();
