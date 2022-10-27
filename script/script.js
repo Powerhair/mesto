@@ -173,17 +173,6 @@ function submitHandlerEdit(event) {
   closePopup(popupProfile);
 };
 
-  /* функция новое место */
-  // const submitAddCard = (event) => {
-  //   event.preventDefault();
-  //   renderElement({
-  //     name: popupInputPlaceTitle.value,
-  //     link: popupInputPlaceLink.value,
-  //   });
-  //   event.target.reset();
-  //   closePopup(popupCardAdd);
-  // };
-
   buttonEditOpen.addEventListener("click", openPopupEdit);
   formEdit.addEventListener("submit", submitHandlerEdit);
   buttonAddCard.addEventListener("click", openFormAddPhoto);
