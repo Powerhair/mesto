@@ -87,14 +87,8 @@ const submitAddCard = (evt) => {
   elements.prepend(elementsCardTemplate);
   closePopup(popupCardAdd);
   formAdd.reset();
-  saveButtonInactive();
 };
 
-function saveButtonInactive() {
-  const buttonSaveAddCard = formAdd.querySelector(".popup__button-submit");
-  buttonSaveAddCard.classList.add(settingList.inactiveButtonClass);
-  buttonSaveAddCard.disabled = true;
-}
 
 buttonAddClose.addEventListener("click", () =>
   closePopup(popupCardAdd)
@@ -134,15 +128,13 @@ function openPopupPhoto(name, link) {
 
   function closePopup(popup) {
     popup.classList.remove("popup_opened");
-    document.addEventListener('keydown', closeByEscape);
+    document.removeEventListener('keydown', closeByEscape);
   };
 
   function openPopupEdit() {
     openPopup(popupProfile);
     inputName.value = profileTitle.textContent;
-
     inputJob.value = profileText.textContent;
-    
   };
 
   function closePopupFormEdit() {
@@ -160,9 +152,8 @@ function openPopupPhoto(name, link) {
 
 
   function openFormAddPhoto() {
-    inputName.value = profileTitle.textContent;
-    inputJob.value = profileText.textContent;
     openPopup(popupCardAdd);
+    formValidatorAddCard.toggleSubmitButtonOnOpeningPopup();
   };
 
   /* функция редактирования профиля */

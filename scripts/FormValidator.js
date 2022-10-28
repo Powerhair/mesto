@@ -10,13 +10,8 @@ export class FormValidator {
         this._inputErrorClass = setting.inputErrorClass; 
     
         this._formElement = formElement;
-        this._formList = Array.from(document.querySelectorAll(this._formSelector));
-        this._inputList = Array.from(
-          this._formElement.querySelectorAll(this._inputSelector)
-        ); // массив инпутов
-        this._buttonElement = this._formElement.querySelector(
-          this._submitButtonSelector
-        ); // кнопка формы
+        this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector)); // массив инпутов
+        this._buttonElement = this._formElement.querySelector(this._submitButtonSelector); // кнопка формы
     }
 
     _showInputError(inputElement) {
@@ -48,34 +43,42 @@ export class FormValidator {
       }
 
     _toggleButtoneState() {
-        if (this._hasInvalidInput(this._inputList)) {
+        if (this._hasInvalidInput()) {
           this._buttonElement.classList.add(this._inactiveButtonClass);
-          this._buttonElement.setAttribute("disabled", "disabled");
+          this._buttonElement.disabled = true;
         } else {
           this._buttonElement.classList.remove(this._inactiveButtonClass);
-          this._buttonElement.removeAttribute("disabled", "disabled");
+          this._buttonElement.disabled = false;
         }
       }
 
     _setEventListeners () {
-        this._toggleButtoneState(this._inputList, this._buttonElement);
+        this._toggleButtoneState();
   
         this._inputList.forEach((inputElement) => {
           inputElement.addEventListener("input", () => {
             // Внутри колбэка вызовем checkInputValidity
             // передав ей форму и проверяемый элемент
             this._checkInputValidity(inputElement);
-            this._toggleButtoneState(this._inputList, this._buttonElement);
+            this._toggleButtoneState();
           });
         });
       };
 
 
-      enableValidation = () => {
-        // Переберём полученную коллекцию
-        this._formList.forEach((formElement) => {
-          this._setEventListeners(formElement);
+      toggleSubmitButtonOnOpeningPopup() {
+        // сделать кнопку сохранения неактивной, если поля невалидные
+        this._toggleButtoneState(this._inputList, this._buttonElement);
+      };
+
+
+      enableValidation() {
+        // для формы сбросить дефолтное поведение кнопки сохранения
+        this._formElement.addEventListener('submit', (evt) => {
+          evt.preventDefault();
         });
+        // повесить листнеры на все инпуты формы
+        this._setEventListeners();
       };
        
 
