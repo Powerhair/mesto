@@ -75,9 +75,15 @@ const initialCards = [
   },
 ];
 
-const createCard = (card) => {
+const createCard = (addCard) => {
+  const card = new Card(addCard, "#element-template", openPopupPhoto);
   const elementsCardTemplate = card.generateCard();
-  elements.prepend(elementsCardTemplate);
+  return elementsCardTemplate;
+}
+
+const insertCard = (item) => {
+  const card = createCard(item, "#element-template", openPopupPhoto);
+  elements.prepend(card);
 }
 
 const submitAddCard = (evt) => {
@@ -86,12 +92,10 @@ const submitAddCard = (evt) => {
    name: popupInputPlaceTitle.value,
    link: popupInputPlaceLink.value,
   };
-  const card = new Card(addCard, "#element-template", openPopupPhoto);
-  createCard(card)
+  insertCard(addCard)
   closePopup(popupCardAdd);
   formAdd.reset();
 };
-
 
 buttonAddClose.addEventListener("click", () =>
   closePopup(popupCardAdd)
@@ -100,9 +104,7 @@ formAdd.addEventListener("submit", submitAddCard);
 
 
 initialCards.forEach((item) => {
-  const card = new Card(item, "#element-template", openPopupPhoto);
-  createCard(card)
-  
+  insertCard(item)
 });
 
 function openPopupPhoto(name, link) {
