@@ -1,3 +1,4 @@
+import './pages/index.css'
 
 import { initialCards, elements, popupFullscreen, popupCardAdd, popupProfile, buttonAddCard, settingList, formElementEdit, buttonEditOpen, inputName, inputJob } from "./utils/constans.js";
 import FormValidator from "./components/FormValidator.js";
