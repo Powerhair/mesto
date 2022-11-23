@@ -11,6 +11,14 @@ import PopupWithImage from "../components/PopupWithImage.js";
 // класс Section
 // С помощью функции renderer добавляем вновь созданную карточку на страницу
 
+const apiConfig = {
+  url: 'https://nomoreparties.co/v1/cohort-54',
+  headers: {
+    'Content-Type': 'application/json',
+      authorization: 'eef832b0-db39-4c9c-94d9-9862628b85e3'
+  }
+}
+
 const cardList = new Section(
   {
     items: initialCards,
