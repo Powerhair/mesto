@@ -1,96 +1,196 @@
 import './index.css'
 
-import { initialCards, elements, popupFullscreen, popupCardAdd, popupProfile, buttonAddCard, settingList, formElementEdit, buttonEditOpen, inputName, inputJob } from "../utils/constans.js";
+import { elements, popupFullscreen, popupCardAdd, popupProfile, buttonAddCard, settingList, formElementEdit, buttonEditOpen, popupDelete, popupChangeAvatar, profileName, profileJob, profileAvatar } from "../utils/constans.js";
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import Api from "../components/Api.js";
 
-// класс Section
-// С помощью функции renderer добавляем вновь созданную карточку на страницу
+const popupCard = new PopupWithForm(popupCardAdd, addCard);
+const popupDeleteForm = new PopupWithForm(popupDelete);
+const popupAvatar = new PopupWithForm(popupChangeAvatar, addAvatar)
+const popupProfileForm = new PopupWithForm(popupProfile, addUserInfo);
+const popupImage = new PopupWithImage(popupFullscreen);
 
-const apiConfig = {
-  url: 'https://nomoreparties.co/v1/cohort-54',
+const api = new Api ({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-54/',
   headers: {
-    'Content-Type': 'application/json',
-      authorization: 'eef832b0-db39-4c9c-94d9-9862628b85e3'
+      authorization: 'eef832b0-db39-4c9c-94d9-9862628b85e3',
+      'Content-Type': 'application/json'
   }
-}
+})
+
+
+const userInfo = new UserInfo(profileName, profileJob, profileAvatar);
+
+let idUser
+
+api.getData()
+  .then(([user, data]) => {
+    //наполнили ее моим id
+    idUser = user._id
+    userInfo.setUserInfo(user)
+    userInfo.setUserAvatar(user.avatar)
+    cardList.renderItems(data)
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const cardList = new Section(
   {
-    items: initialCards,
-    renderer: (item) => {
-      cardList.addItem(createCard(item));
+    items: [],
+    renderer: (data) => {
+      cardList.addItemServer(createCard(data));
     },
   },
   elements
 );
 
 
-cardList.renderItems(initialCards);
+// cardList.renderItems(initialCards);
 
-// Класс UserInfo передаем классу в конструктор значения имени и рода деятельности пользователя 
 
-const userInfo = new UserInfo({
-  name: ".profile__title",
-  job: ".profile__text",
-});
 
-// Нажатием на кнопку редактирования данных пользователя, открываем попап, вызываем функцию getUserInfo из класса UserInfo, тем самым получаем заполнение поля в попапе, подключаем валидацию к форме
-
-buttonEditOpen.addEventListener("click", () => {
-  popupProfileForm.open();
-  const input = userInfo.getUserInfo();
-  inputName.value = input.name;
-  inputJob.value = input.job;
-  formValidatorEdit.enableValidation();
-});
-
-// Функция для кнопки submit, передаем данные введеные в поля формы в метод setUserInfo класса UserInfo для изменения данных о пользователе, закрываем попап
-
-function submitPopupProfile(data) {
-  userInfo.setUserInfo(data.nameInput, data.jobInput);
-  popupProfileForm.close();
+function addUserInfo(data) {
+  popupProfileForm.load(true)
+  const { name, about } = data;
+  api.setUserInfo(name, about)
+    .then((user) => {
+      userInfo.setUserInfo(user);
+      popupProfileForm.close()
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      popupProfileForm.load(false);
+    });
 }
 
-const popupProfileForm = new PopupWithForm(popupProfile, submitPopupProfile);
+function addCard(post) {
+  popupCard.load(true)
+  api.postUserCard(post)
+    .then((data) => {
+      cardList.addItemUser(createCard(data));
+      popupCard.close()
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      popupCard.load(false)
+    })
+    ;
+}
 
-function createCard(item) {
-  // Создадим экземпляр карточки 2 пр template карточки(с лайками и т.д.) 3- попап с картинкой
-  const card = new Card(item, "#element-template", handleCardClick);
+function addAvatar(image) {
+  popupAvatar.load(true)
+  api.getUserAvatar(image.link)
+    .then((res) => {
+      userInfo.setUserAvatar(res.avatar)
+      popupAvatar.close()
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      popupAvatar.load(false);
+    });
+}
+
+function createCard(data) {
+  const card = new Card(data, "#element-template", openPopupPhoto,
+  idUser,
+    (id) => {
+      api.addLike(id)
+        .then((res) => {
+          card.setLikeCounter(res);
+          card.addLike()
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    (id) => {
+      api.removeLike(id)
+        .then((res) => {
+          card.setLikeCounter(res)
+          card.removeLike()
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    },
+    (id) => {
+      popupDeleteForm.open()
+      popupDeleteForm.setNewSubmitForm(() => {
+        api.removeCard(id)
+          .then(() => {
+            card.deleteCard()
+            popupDeleteForm.close()
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+    }
+  );
   // Создаём карточку и возвращаем наружу
   const cardItem = card.generateCard();
   return cardItem;
 }
 
-const popupCard = new PopupWithForm(popupCardAdd, submitProfileForm);
-
-function submitProfileForm(data) {
-  const formValue = {
-    name: data.titleInput,
-    link: data.linkInput,
-  };
-  cardList.addItem(createCard(formValue));
-  popupCard.close();
-}
-
-const popupImage = new PopupWithImage(popupFullscreen);
-
-function handleCardClick(name, link) {
+function openPopupPhoto(name, link) {
   popupImage.open(name, link);
 }
 
-buttonAddCard.addEventListener("click", () => {
-  popupCard.open();
-  formValidatorAddCard.enableValidation();
+// Нажатием на кнопку редактирования данных пользователя, открываем попап, вызываем функцию getUserInfo из класса UserInfo, тем самым получаем заполнение поля в попапе, подключаем валидацию к форме
+
+buttonEditOpen.addEventListener("click", () => {
+  formValidators['formEdit'].resetValidationErrors()
+  popupProfileForm.open();
+  const input = userInfo.getUserInfo();
+  popupProfileForm.setInputValue(input)
+  popupProfileForm.open();
 });
+
+buttonAddCard.addEventListener("click", () => {
+  formValidators['formAdd'].resetValidationErrors()
+  popupCard.open();
+});
+
+profileAvatar.addEventListener('click', () => {
+  popupAvatar.open();
+  formValidators['formAvatar'].resetValidationErrors();
+})
 
 popupImage.setEventListeners();
 popupCard.setEventListeners();
 popupProfileForm.setEventListeners();
+popupDeleteForm.setEventListeners();
+popupAvatar.setEventListeners();
+
+// Включение валидации
+const formValidators = {}
+const enableValidation = (settingList) => {
+  const formList = Array.from(document.querySelectorAll(settingList.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(settingList, formElement)
+    // получаем данные из атрибута `name` у формы
+    const formName = formElement.getAttribute('name')
+
+    // вот тут в объект записываем под именем формы
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(settingList);
+
 
 const formValidatorEdit = new FormValidator(settingList, formElementEdit);
 const formValidatorAddCard = new FormValidator(settingList, formAdd);

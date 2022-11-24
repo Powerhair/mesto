@@ -71,6 +71,13 @@ export default class FormValidator {
         this._toggleButtoneState(this._inputList, this._buttonElement);
       };
 
+      resetValidationErrors() {
+        this._inputList.forEach((inputElement) => {
+          this._hideInputError(inputElement)
+        })
+        this._toggleButtoneState()
+      }
+
 
       enableValidation() {
         // для формы сбросить дефолтное поведение кнопки сохранения
