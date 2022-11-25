@@ -17,7 +17,6 @@ export default class Card {
 
     }
       
-      
 
     _getTemplate() {
       const elementsCardTemplate = document
@@ -56,7 +55,6 @@ export default class Card {
         this._likeCounter.textContent = res.likes.length;
       }
   
-
       isLiked() {
         this._likes.forEach((user) => {
           if (user._id === this._userId) {
@@ -105,3 +103,5 @@ export default class Card {
           
         }  
 };
+
+export { Card }

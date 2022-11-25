@@ -24,7 +24,7 @@ const api = new Api ({
 })
 
 
-const userInfo = new UserInfo(profileName, profileJob, profileAvatar);
+const userInform = new UserInfo(profileName, profileJob, profileAvatar);
 
 let idUser
 
@@ -32,8 +32,8 @@ api.getData()
   .then(([user, data]) => {
     //наполнили ее моим id
     idUser = user._id
-    userInfo.setUserInfo(user)
-    userInfo.setUserAvatar(user.avatar)
+    userInform.setUserInfo(user)
+    userInform.setUserAvatar(user.avatar)
     cardList.renderItems(data)
   })
   .catch((err) => {
@@ -60,8 +60,9 @@ function addUserInfo(data) {
   const { name, about } = data;
   api.setUserInfo(name, about)
     .then((user) => {
-      userInfo.setUserInfo(user);
+      userInform.setUserInfo(user);
       popupProfileForm.close()
+      console.log(ok)
     })
     .catch((err) => {
       console.log(err);
@@ -91,7 +92,7 @@ function addAvatar(image) {
   popupAvatar.load(true)
   api.getUserAvatar(image.link)
     .then((res) => {
-      userInfo.setUserAvatar(res.avatar)
+      userInform.setUserAvatar(res.avatar)
       popupAvatar.close()
     })
     .catch((err) => {
@@ -153,7 +154,7 @@ function openPopupPhoto(name, link) {
 buttonEditOpen.addEventListener("click", () => {
   formValidators['formEdit'].resetValidationErrors()
   popupProfileForm.open();
-  const input = userInfo.getUserInfo();
+  const input = userInform.getUserInfo();
   popupProfileForm.setInputValue(input)
   popupProfileForm.open();
 });
@@ -191,11 +192,7 @@ const enableValidation = (settingList) => {
 
 enableValidation(settingList);
 
-
-const formValidatorEdit = new FormValidator(settingList, formElementEdit);
-const formValidatorAddCard = new FormValidator(settingList, formAdd);
-formValidatorEdit.enableValidation();
-formValidatorAddCard.enableValidation();
+export { openPopupPhoto, elements }
 
 
 
