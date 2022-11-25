@@ -30,7 +30,6 @@ let idUser
 
 api.getData()
   .then(([user, data]) => {
-    //наполнили ее моим id
     idUser = user._id
     userInform.setUserInfo(user)
     userInform.setUserAvatar(user.avatar)
@@ -49,9 +48,6 @@ const cardList = new Section(
   },
   elements
 );
-
-
-// cardList.renderItems(initialCards);
 
 
 
