@@ -1,4 +1,4 @@
-// import './index.css'
+import './index.css'
 
 import { elements, popupFullscreen, popupCardAdd, popupProfile, buttonAddCard, settingList, formElementEdit, buttonEditOpen, popupDelete, popupChangeAvatar, profileName, profileJob, profileAvatar } from "../utils/constans.js";
 import FormValidator from "../components/FormValidator.js";
