@@ -53,8 +53,8 @@ const cardList = new Section(
 
 function addUserInfo(data) {
   popupProfileForm.load(true)
-  const { name, about } = data;
-  api.setUserInfo(name, about)
+  const { nameInput, jobInput } = data;
+  api.setUserInfo(nameInput, jobInput)
     .then((user) => {
       userInform.setUserInfo(user);
       popupProfileForm.close()
@@ -72,7 +72,7 @@ function addCard(post) {
   popupCard.load(true)
   api.postUserCard(post)
     .then((data) => {
-      cardList.addItemUser(createCard(data));
+      cardList.addItem(createCard(data));
       popupCard.close()
     })
     .catch((err) => {
@@ -86,7 +86,7 @@ function addCard(post) {
 
 function addAvatar(image) {
   popupAvatar.load(true)
-  api.getUserAvatar(image.link)
+  api.getUserAvatar(image.linkInput)
     .then((res) => {
       userInform.setUserAvatar(res.avatar)
       popupAvatar.close()
@@ -149,9 +149,8 @@ function openPopupPhoto(name, link) {
 
 buttonEditOpen.addEventListener("click", () => {
   formValidators['formEdit'].resetValidationErrors()
-  popupProfileForm.open();
-  const input = userInform.getUserInfo();
-  popupProfileForm.setInputValue(input)
+  const userData = userInform.getUserInfo();
+  popupProfileForm.setInputValue(userData)
   popupProfileForm.open();
 });
 

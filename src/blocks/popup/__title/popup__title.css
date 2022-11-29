@@ -15,3 +15,8 @@
       font-size: 18px;
     }
   }
+
+  .popup__title_delete {
+    margin-bottom: -11px;
+    padding-bottom: 0;
+  }

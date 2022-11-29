@@ -16,9 +16,11 @@
     </header>
     <main class="content">
         <section class="profile">
-            <img src=""
-                 alt="Фото профиля"
-                 class="profile__avatar">
+            <div class="profile__image">
+                <img src=""
+                    alt="Фото профиля"
+                    class="profile__avatar">
+            </div>
             <div class="profile__info">
                 <h1 class="profile__title"></h1>
                 <p class="profile__text"></p>
@@ -124,20 +126,17 @@
           </div>
         <!-- popup удаления карточки -->
         <div class="popup popupDelete">
-            <div class="popup__container">
-                <button type="button" class="popup__close popup__close_card"></button>
                 <form name="formDelete" class="form" novalidate>
                 <h2 class="popup__title popup__title_delete">Вы уверены?</h2>
+                <button type="button" class="popup__close popup__close_card"></button>
                 <button type="submit" class="popup__button-submit">Да</button>
                 </form>
             </div>
         </div>
         <!-- popup редактирования аватара -->
-        <div class="popup popupChangeAvatar">
-            <div class="popup__container">
-              <button type="button" class="popup__close popup__close_card"></button>
-              <h2 class="popup__title popup__title_avatar">Обновить аватар</h2>
+        <div class="popup popupChangeAvatar"> 
               <form name="formAvatar" class="form popup__form_avatar" novalidate>
+                <h2 class="popup__title popup__title_avatar">Обновить аватар</h2>
                 <input name="linkInput"
                    id="link-input"
                    value="" 
@@ -148,10 +147,9 @@
                    <div class="form__error-conteiner">
                         <span id="link-input-error" class="form-input-message-error"></span>
                    </div>
+                   <button type="button" class="popup__close popup__close_card"></button>
                 <button type="submit" class="popup__button-submit">Сохранить</button>
               </form>
-            </div>
           </div>
-
 </body>
 </html>

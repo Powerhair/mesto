@@ -3,6 +3,8 @@ export default class Api {
       this._url = url;
       this._headers = headers
     }
+
+
   
     _checkRequest(res) {
       if (res.ok) {
@@ -14,12 +16,12 @@ export default class Api {
     
   
     getUserInfo() {
-      return fetch(`${this._url}/users/me`,
+      return fetch(`${this._url}users/me`,
       { headers: this._headers }).then(this._checkRequest)
     }
   
     getInitialCards() {
-      return fetch(`${this._url}/cards`,
+      return fetch(`${this._url}cards`,
       { headers: this._headers }).then(this._checkRequest)
     }
   
@@ -45,8 +47,7 @@ export default class Api {
           method: 'PATCH',
           headers: this._headers,
           body: JSON.stringify({ name, about })
-        })
-        .then(this._checkRequest)
+        }).then(this._checkRequest)
     }
   
     postUserCard(post) {
@@ -55,11 +56,10 @@ export default class Api {
           method: 'POST',
           headers: this._headers,
           body: JSON.stringify({
-            link: post.link,
-            name: post.name
+            link: post.linkInput,
+            name: post.titleInput
           })
-        })
-        .then(this._checkRequest)
+        }).then(this._checkRequest)
     }
   
     addLike(likeId) {
