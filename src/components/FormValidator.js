@@ -68,7 +68,7 @@ export default class FormValidator {
 
       toggleSubmitButtonOnOpeningPopup() {
         // сделать кнопку сохранения неактивной, если поля невалидные
-        this._toggleButtoneState(this._inputList, this._buttonElement);
+        this._toggleButtoneState(this._buttonElement);
       };
 
       resetValidationErrors() {
@@ -80,10 +80,6 @@ export default class FormValidator {
 
 
       enableValidation() {
-        // для формы сбросить дефолтное поведение кнопки сохранения
-        this._formElement.addEventListener('submit', (evt) => {
-          evt.preventDefault();
-        });
         // повесить листнеры на все инпуты формы
         this._setEventListeners();
       };

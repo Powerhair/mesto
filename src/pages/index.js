@@ -1,4 +1,4 @@
-import './index.css'
+// import './index.css'
 
 import { elements, popupFullscreen, popupCardAdd, popupProfile, buttonAddCard, settingList, formElementEdit, buttonEditOpen, popupDelete, popupChangeAvatar, profileName, profileJob, profileAvatar } from "../utils/constans.js";
 import FormValidator from "../components/FormValidator.js";
@@ -24,7 +24,7 @@ const api = new Api ({
 })
 
 
-const userInform = new UserInfo(profileName, profileJob, profileAvatar);
+const userInform = new UserInfo({name:profileName, about:profileJob, image:profileAvatar});
 
 let idUser
 
@@ -105,7 +105,7 @@ function createCard(data) {
       api.addLike(id)
         .then((res) => {
           card.setLikeCounter(res);
-          card.addLike()
+          card.addLike();
         })
         .catch((err) => {
           console.log(err);
@@ -115,7 +115,7 @@ function createCard(data) {
       api.removeLike(id)
         .then((res) => {
           card.setLikeCounter(res)
-          card.removeLike()
+          card.removeLike();
         })
         .catch((err) => {
           console.log(err);

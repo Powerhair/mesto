@@ -81,7 +81,6 @@ export default class Card {
         } else {
           this._addLike(id)
         }
-        this._likeElement.classList.toggle('element__like-active');
       }
 
       _setEventListeners() {
@@ -98,10 +97,6 @@ export default class Card {
         });
       }
 
-      _handleDeleteElementsCard() {
-          this._element.remove();
-          
-        }  
 };
 
 export { Card }

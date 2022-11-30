@@ -1,7 +1,6 @@
 // класс Section на вход получает массив карточек, функцию renderer которая добавляет карточку на страницу, и место куда добавить карточки (containerSelector)
 export default class Section {
-    constructor({items, renderer}, containerSelector) {
-      this._items = items;
+    constructor({renderer}, containerSelector) {
       this._container = containerSelector;
       this._renderer = renderer;
     }
