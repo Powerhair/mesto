@@ -1,11 +1,13 @@
 export default class UserInfo {
-  constructor({name, about, image}) {
-    this._name = name;
-    this._about = about;
-    this._image = image;
+  constructor(objectForUserInform) {
+    this._name = objectForUserInform.profileName;
+    this._about = objectForUserInform.profileJob;
+    this._image = objectForUserInform.profileAvatar;
   }
 
+
   getUserInfo() {
+   
     const object = {
       nameInput: this._name.textContent,
       jobInput: this._about.textContent

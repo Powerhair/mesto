@@ -23,8 +23,9 @@ const api = new Api ({
   }
 })
 
+const objectForUserInform = { profileName, profileJob, profileAvatar }
 
-const userInform = new UserInfo({name:profileName, about:profileJob, image:profileAvatar});
+const userInform = new UserInfo(objectForUserInform);
 
 let idUser
 
