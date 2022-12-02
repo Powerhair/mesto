@@ -6,6 +6,7 @@
  export const profileName = document.querySelector(".profile__title")
  export const profileJob = document.querySelector(".profile__text")
  export const profileAvatar = document.querySelector(".profile__avatar")
+ export const profile = document.querySelector(".profile")
 
 
 // Объявляем переменные для popup

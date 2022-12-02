@@ -1,6 +1,6 @@
 import './index.css'
 
-import { elements, popupFullscreen, popupCardAdd, popupProfile, buttonAddCard, settingList, formElementEdit, buttonEditOpen, popupDelete, popupChangeAvatar, profileName, profileJob, profileAvatar } from "../utils/constans.js";
+import { elements, popupFullscreen, popupCardAdd, popupProfile, buttonAddCard, settingList, profile, buttonEditOpen, popupDelete, popupChangeAvatar, profileName, profileJob, profileAvatar } from "../utils/constans.js";
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
@@ -23,9 +23,8 @@ const api = new Api ({
   }
 })
 
-const objectForUserInform = { profileName, profileJob, profileAvatar }
 
-const userInform = new UserInfo(objectForUserInform);
+const userInform = new UserInfo(".profile__title", ".profile__text", ".profile__avatar");
 
 let idUser
 
